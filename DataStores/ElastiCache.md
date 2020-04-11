@@ -4,7 +4,7 @@ Performance at Scale with Amazon ElastiCache white paper - hhttps://d0.awsstatic
 ### Questions goes here
 ```
 
-** 1. What is ElastiCache Architecture?** 
+ 1. What is ElastiCache Architecture?
 ```
 <details><summary>show</summary>
 <p>
@@ -22,7 +22,7 @@ Performance at Scale with Amazon ElastiCache white paper - hhttps://d0.awsstatic
 
 ```
 
-** 2. What is in-memory caching and how does it help my applications?** 
+ 2. What is in-memory caching and how does it help my applications?
 ```
 <details><summary>show</summary>
 <p>
@@ -37,7 +37,7 @@ Performance at Scale with Amazon ElastiCache white paper - hhttps://d0.awsstatic
 
 ```
 
-** 3. What are the two different in-memory key-value engines currently supported by Amazon ElastiCache ?** 
+ 3. What are the two different in-memory key-value engines currently supported by Amazon ElastiCache ?
 ```
 <details><summary>show</summary>
 <p>
@@ -50,7 +50,7 @@ Performance at Scale with Amazon ElastiCache white paper - hhttps://d0.awsstatic
 
 ```
 
-** 4. Redis?** 
+ 4. Redis 
 ```
 <details><summary>show</summary>
 <p>
@@ -67,7 +67,7 @@ Performance at Scale with Amazon ElastiCache white paper - hhttps://d0.awsstatic
 
 ```
 
-** 5. Memcached?** 
+ 5. Memcached 
 ```
 <details><summary>show</summary>
 <p>
@@ -83,7 +83,7 @@ Performance at Scale with Amazon ElastiCache white paper - hhttps://d0.awsstatic
 
 ```
 
-** 6. When to choose Memcached ?** 
+  6. When to choose Memcached ?
 ```
 <details><summary>show</summary>
 <p>
@@ -98,7 +98,7 @@ Performance at Scale with Amazon ElastiCache white paper - hhttps://d0.awsstatic
 
 ```
 
-** 7. When to choose Redis ?** 
+  7. When to choose Redis ? 
 ```
 <details><summary>show</summary>
 <p>
@@ -120,7 +120,7 @@ Performance at Scale with Amazon ElastiCache white paper - hhttps://d0.awsstatic
 
 ```
 
-** 8. Caching Design Patterns ?** 
+  8. Caching Design Patterns 
 ```
 <details><summary>show</summary>
 <p>
@@ -140,7 +140,7 @@ Performance at Scale with Amazon ElastiCache white paper - hhttps://d0.awsstatic
 
 ```
 
-** 9. Lazy Caching ?** 
+  9. Lazy Caching 
 ```
 <details><summary>show</summary>
 <p>
@@ -163,7 +163,7 @@ Laziness should serve as the foundation of any good caching strategy.
 
 ```
 
-** 10. Time-to-live ?** 
+  10. Time-to-live 
 ```
 <details><summary>show</summary>
 <p>
@@ -183,7 +183,7 @@ Laziness should serve as the foundation of any good caching strategy.
 
 ```
 
-** 11. Evictions ?** 
+  11. Evictions
 ```
 <details><summary>show</summary>
 <p>
@@ -203,7 +203,7 @@ Laziness should serve as the foundation of any good caching strategy.
 
 ```
 
-** 12. Write-Through ?** 
+  12. Write-Through
 ```
 <details><summary>show</summary>
 <p>
@@ -220,7 +220,7 @@ So, if a user updates his or her profile, the updated profile is also pushed int
 
 ```
 
-** 13. The Thundering Herd ?** 
+   13. The Thundering Herd 
 ```
 <details><summary>show</summary>
 <p>
@@ -242,7 +242,7 @@ solutions is to prewarm the cache by following these steps:
 
 ```
 
-** 14. Architecture with ElastiCache for Redis- Part 1** 
+   14. Architecture with ElastiCache for Redis- Part 1
 ```
 <details><summary>show</summary>
 <p>
@@ -259,7 +259,7 @@ solutions is to prewarm the cache by following these steps:
 
 ```
 
-** 15. Architecture with ElastiCache for Redis- Part 2 (Distributing Reads and Writes) ** 
+  15. Architecture with ElastiCache for Redis- Part 2 (Distributing Reads and Writes) 
 ```
 <details><summary>show</summary>
 <p>
@@ -273,7 +273,7 @@ Distributing Reads and Writes :
 
 ```
 
-** 16. Architecture with ElastiCache for Redis- Part 3  (Multi-AZ with Auto-Failover)  ** 
+  16. Architecture with ElastiCache for Redis- Part 3  (Multi-AZ with Auto-Failover)  
 ```
 <details><summary>show</summary>
 <p>
@@ -290,7 +290,7 @@ Multi-AZ with Auto-Failover:
 
 ```
 
-** 17. Architecture with ElastiCache for Redis- Part 4  (Sharding with Redis)  ** 
+  17. Architecture with ElastiCache for Redis- Part 4  (Sharding with Redis)  
 ```
 <details><summary>show</summary>
 <p>
@@ -304,7 +304,7 @@ Sharding with Redis :
 
 ```
 
-** 18. Monitoring and Tuning  ** 
+  18. Monitoring and Tuning   
 ```
 <details><summary>show</summary>
 <p>
@@ -324,24 +324,3 @@ Currconnections—this is a cache engine metric representing the number of clien
 An increasing number of CurrConnections might indicate a problem with your application— you'll need to investigate the application's behavior to address this issue.
 </details>
 
-```
-
-** 18. Monitoring and Tuning  ** 
-```
-<details><summary>show</summary>
-<p>
-Here is some additional guidance for monitoring cache memory utilization. Each of these metrics is available in CloudWatch for your ElastiCache cluster:
-
-Evictions—both Memcached and Redis manage cache memory internally, and when memory starts to fill up they evict (delete) unused cache keys to free space. A small number of evictions shouldn't alarm you, but a large number means that your cache is running out of space. •
-
-CacheMisses—the number of times a key was requested but not found in the cache. This number can be fairly large if you're using lazy population as your main strategy. If this number is remaining steady, it's likely nothing to worry about. However, a large number of cache misses combined with a large eviction number can indicate that your cache is thrashing due to lack of memory.
-
-BytesUsedForCacheItems—this value is the actual amount of cache memory that Memcached or Redis is using.
-Both Memcached and Redis attempt to allocate as much system memory as possible, even if it's not used by actual cache keys. Thus, monitoring the system memory usage on a cache node doesn't tell you how full your cache actually is. •
-
-SwapUsage—in normal usage, neither Memcached nor Redis should be performing swaps.
-
-Currconnections—this is a cache engine metric representing the number of clients connected to the engine. We recommend that you determine your own alarm threshold for this metric based on your application needs.
-
-An increasing number of CurrConnections might indicate a problem with your application— you'll need to investigate the application's behavior to address this issue.
-</details>
